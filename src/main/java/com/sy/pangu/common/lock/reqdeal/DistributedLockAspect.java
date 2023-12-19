@@ -6,8 +6,6 @@ import com.sy.pangu.common.lock.Lock;
 import com.sy.pangu.common.lock.LockManager;
 import com.sy.pangu.common.lock.config.LockProperties;
 import com.sy.pangu.common.lock.reqdeal.handler.LockHandler;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,7 +14,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -126,13 +122,6 @@ public class DistributedLockAspect {
             }
         }
         return proceedingJoinPoint.proceed();
-    }
-
-    @Data
-    @AllArgsConstructor
-    public static class ResultModel{
-        private Integer code;
-        private String message;
     }
 }
 

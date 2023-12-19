@@ -1,19 +1,12 @@
 package com.sy.pangu.common.lock.zk;
 
-import cn.hutool.core.util.ReflectUtil;
 import com.sy.pangu.common.lock.Lock;
 import com.sy.pangu.common.lock.LockManager;
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
-
-import java.lang.reflect.Constructor;
 
 /**
  * @author cheng.wang
@@ -36,13 +29,8 @@ public class ZkLockManager implements LockManager {
 
     @Override
     public Lock createFairLock(String sys, String biz, String bizKey) {
-        //InterProcessMutex interProcessMutex = new InterProcessMutex(zkClient, String.format("/%s/%s/%s", sys, biz, bizKey));
         InterProcessMutex interProcessMutex = null;
         try {
-            //CtClass ctClass = ClassPool.getDefault().get("org.apache.curator.framework.recipes.locks.InterProcessMutex");
-            //ClassLoader loader = new CustomClassLoader();
-            //Constructor<?> constructor = ctClass.toClass().getConstructor(CuratorFramework.class, String.class);
-            //interProcessMutex = (InterProcessMutex) constructor.newInstance(zkClient, String.format("/%s/%s/%s", sys, biz, bizKey));
             interProcessMutex = (InterProcessMutex) ModifyInterProcessMutexRelease.getInstance(zkClient, String.format("/%s/%s/%s", sys, biz, bizKey));
         } catch (Exception e) {
             throw new RuntimeException(e);
