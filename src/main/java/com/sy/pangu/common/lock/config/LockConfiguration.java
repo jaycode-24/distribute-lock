@@ -44,7 +44,6 @@ public class LockConfiguration {
 
     private final static String SINGLE_REDIS_ADDRESS = "redis://%s:%s";
     private final static String MULTI_REDIS_ADDRESS = "redis://%s";
-
     private final static String ZK_LOCK_PREFIX = "lock";
 
     @Configuration
